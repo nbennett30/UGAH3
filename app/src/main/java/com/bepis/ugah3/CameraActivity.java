@@ -3,6 +3,8 @@ package com.bepis.ugah3;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
@@ -120,6 +122,7 @@ public class CameraActivity extends AppCompatActivity {
         txt.setText(hex);
     }
 
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.i("CameraActivity", "onRequestPermissionsResult");
@@ -371,8 +374,11 @@ public class CameraActivity extends AppCompatActivity {
             if (image != null) {
                 Image.Plane plane = image.getPlanes()[0];
                 ByteBuffer buffer = plane.getBuffer();
-
                 //Log.i("ImageReaderFrameWatcher", "Size: " + buffer.limit());
+                byte[] bytes = new byte[buffer.capacity()];
+                buffer.get(bytes);
+                Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+                int center = bitmapImage.getPixel(bitmapImage.getWidth()/2, bitmapImage.getHeight()/2);
 
                 image.close();
             }
