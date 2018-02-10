@@ -3,8 +3,11 @@ package com.bepis.ugah3;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -29,6 +32,8 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -36,6 +41,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.bepis.ugah3.getColors.getBlue;
 
 public class CameraActivity extends AppCompatActivity {
     private final String[] CAMERA_PERMISSIONS = new String[] {
@@ -99,9 +106,20 @@ public class CameraActivity extends AppCompatActivity {
         if (this.cameraId == null) {
             Toast.makeText(this.getApplicationContext(), "You must have a camera on your device.", Toast.LENGTH_LONG).show();
         }
+
+        //changes color of reticle
+        ImageView img = (ImageView) findViewById(R.id.imageView);
+        GradientDrawable shp = (GradientDrawable) img.getBackground();
+        int h = randomHex.getRandomHex();
+        shp.setStroke(10, Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
+
+        //changes color of reticle
+        String hex = "#"+Integer.toHexString(h);
+        TextView txt = (TextView) findViewById(R.id.textView);
+        txt.setTextColor(Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
+        txt.setText(hex);
     }
 
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.i("CameraActivity", "onRequestPermissionsResult");
