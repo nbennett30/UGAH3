@@ -378,6 +378,8 @@ public class CameraActivity extends AppCompatActivity {
             Image image = reader.acquireLatestImage();
             if (image != null) {
                 Image.Plane plane = image.getPlanes()[0];
+                int width = image.getWidth();
+                int height = image.getHeight();
                 ByteBuffer buffer = plane.getBuffer();
                 //Log.i("ImageReaderFrameWatcher", "Size: " + buffer.limit());
                 byte[] bytes = new byte[buffer.capacity()];
@@ -389,7 +391,14 @@ public class CameraActivity extends AppCompatActivity {
                 double g = pix[1];
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
-                final int pixel = rgb[image.getWidth()*image.getHeight()/2 + image.getWidth()/2];
+                //final int pixel = rgb[width*height/2 + width/2];
+                final int[] pixels = new int[(width/16) * (height/16)];
+                for (int i = 0; i < width/16; i++) {
+                    for (int j = 0; j < height/16; j++) {
+                        pixels[i] = rgb[(i*width + ((7*height/16)*width)) + j + (7*width/16)];
+                    }
+                }
+                final int pixel = getColors.averageHex(pixels);
                 //Log.d("Center Color: ", Integer.toHexString(pixel));
                 runOnUiThread(new Runnable() {
                     @Override
