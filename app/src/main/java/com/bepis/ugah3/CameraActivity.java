@@ -398,8 +398,9 @@ public class CameraActivity extends AppCompatActivity {
                         updateText(Integer.toHexString(pixel));
                         //changes color of text
                         String hex = "#"+Integer.toHexString(pixel);
+                        System.out.println(pixel);
                         txt = (TextView) findViewById(R.id.textView);
-                        txt.setTextColor(Color.argb(0xff, getColors.getRed(pixel), getColors.getGreen(pixel), getBlue(pixel)));
+                        txt.setTextColor(Color.argb(0xFF, getColors.getRed(pixel), getColors.getGreen(pixel), getBlue(pixel)));
                         txt.setText(hex);
                     }
                 });
@@ -475,7 +476,7 @@ public class CameraActivity extends AppCompatActivity {
               but keep the offset of the interleaving.
              */
                 final int u = (uPlane.get(uvPos) & 0xff) - 128;
-                final int v = (vPlane.get(uvPos+1) & 0xff) - 128;
+                final int v = (vPlane.get(uvPos) & 0xff) - 128;
                 if ((j & 1) == 1) {
                     uvPos += 2;
                 }
