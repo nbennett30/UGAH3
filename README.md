@@ -1,5 +1,5 @@
 # Hex Hunter (UGAH3) [Nick Bennett, Aizad Mohdzaid, Thomas Yoo, Phillip Lee]
-![](Screenshot_20180211-040638.png)
+![](Screenshot_20180211-040638.png=250x)
 
 Hex Hunter is a game that produces a random *hexadecimal* RGB value, and the player tries to find a color in the real world with his/her camera! 
 
