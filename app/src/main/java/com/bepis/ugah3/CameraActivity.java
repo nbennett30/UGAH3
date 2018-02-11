@@ -81,6 +81,11 @@ public class CameraActivity extends AppCompatActivity {
     private ImageReaderFrameWatcher imageReaderFrameWatcher;
     private SurfaceWatcher surfaceWatcher;
 
+    void updateText(String text) {
+        if (txt != null) {
+            txt.setText(text);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -391,7 +396,7 @@ public class CameraActivity extends AppCompatActivity {
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
                 int pixel = rgb[image.getWidth()*image.getHeight()/2 + image.getWidth()/2];
                 //Log.d("Center Color: ", Integer.toHexString(pixel));
-                txt.setText(Integer.toHexString(pixel));
+                updateText(Integer.toHexString(pixel));
                 image.close();
             }
         }
