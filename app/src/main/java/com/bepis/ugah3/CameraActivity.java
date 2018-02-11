@@ -501,7 +501,12 @@ public class CameraActivity extends AppCompatActivity {
                 if (yPos >= total)
                     break;
 
-                final int y1 = yPlane.get(yPos++) & 0xff;
+                int y1 = 0;
+                try {
+                    y1 = yPlane.get(yPos++) & 0xff;
+                } catch (Exception e) {
+
+                }
 
             /*
               The ordering of the u (Cb) and v (Cr) bytes inside the planes is a
