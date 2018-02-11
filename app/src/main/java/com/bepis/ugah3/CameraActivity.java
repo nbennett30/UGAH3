@@ -389,10 +389,10 @@ public class CameraActivity extends AppCompatActivity {
         public void onImageAvailable(ImageReader reader) {
             Image image = reader.acquireLatestImage();
             if (image != null) {
-                Image.Plane plane = image.getPlanes()[0];
+                //Image.Plane plane = image.getPlanes()[0];
                 int width = image.getWidth();
                 int height = image.getHeight();
-                ByteBuffer buffer = plane.getBuffer();
+                /*ByteBuffer buffer = plane.getBuffer();
                 //Log.i("ImageReaderFrameWatcher", "Size: " + buffer.limit());
                 byte[] bytes = new byte[buffer.capacity()];
                 buffer.get(bytes);
