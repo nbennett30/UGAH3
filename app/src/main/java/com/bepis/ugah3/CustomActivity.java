@@ -26,7 +26,7 @@ public class CustomActivity extends AppCompatActivity {
                     int hex = Integer.parseInt(color, 16);
                     Intent intent = new Intent(view.getContext(), CameraActivity.class);
                     intent.putExtra("bool", false);
-                    intent.putExtra("color", hex);
+                    intent.putExtra("input", hex);
                     startActivity(intent);
                 } catch (NumberFormatException e) {
                     Toast.makeText(getApplicationContext(), "Invalid Hex Code", Toast.LENGTH_SHORT).show();
