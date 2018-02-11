@@ -28,7 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CameraActivity" />
-        <activity android:name=".WinScreen"></activity>
+        <activity android:name=".WinScreen" />
+        <activity android:name=".CustomActivity"></activity>
     </application>
 
 </manifest>

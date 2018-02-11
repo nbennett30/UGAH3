@@ -23,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button custom = (Button) findViewById(R.id.custom);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CustomActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

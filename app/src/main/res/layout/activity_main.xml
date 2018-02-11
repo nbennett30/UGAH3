@@ -51,6 +51,18 @@
         android:layout_marginTop="5dip"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textView1" />
+        <Button
+            android:id="@+id/custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CUSTOM"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_orange_dark"
+            android:layout_below="@id/fab"
+            />
 
 </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
