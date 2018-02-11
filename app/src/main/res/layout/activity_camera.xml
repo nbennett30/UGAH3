@@ -34,6 +34,14 @@
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
             android:text="" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:text="TextView" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
