@@ -28,7 +28,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".CameraActivity" />
-        <activity android:name=".WinScreen"></activity>
+        <activity android:name=".WinScreen"
+                android:label="Congratulations!"
+            >
+        </activity>
     </application>
 
 </manifest>
