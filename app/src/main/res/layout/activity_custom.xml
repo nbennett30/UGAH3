@@ -29,6 +29,8 @@
         android:maxLength="6"
         android:inputType="textFilter"
         android:layout_below="@id/textView3"
+        android:textColor="@android:color/holo_blue_bright"
+        android:backgroundTint="@android:color/holo_blue_bright"
         android:textSize="35sp"/>
 
     <Button
