@@ -2,6 +2,7 @@ package com.bepis.ugah3;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,6 +37,7 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,6 +89,12 @@ public class CameraActivity extends AppCompatActivity {
             txt.setText(text);
         }
     }
+
+    public void onWin() {
+        Intent intent = new Intent(this, WinScreen.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,9 +134,9 @@ public class CameraActivity extends AppCompatActivity {
         h = randomHex.getRandomHex();
         shp.setStroke(10, Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
 
-        txt = (TextView) findViewById(R.id.textView2);
-        txt.setTextColor(Color.argb(0xFF, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
-        txt.setText("#"+Integer.toHexString(h));
+        TextView txt2 = (TextView) findViewById(R.id.textView2);
+        txt2.setTextColor(Color.argb(0xFF, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
+        txt2.setText("#"+Integer.toHexString(h));
     }
 
     @Override
@@ -395,6 +403,9 @@ public class CameraActivity extends AppCompatActivity {
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
                 final int pixel = rgb[width*height/2 + width/2];
+                final String hex = "#"+Integer.toHexString(pixel);
+                //System.out.println(pixel);
+                txt = (TextView) findViewById(R.id.textView);
                 /*final int[] pixels = new int[9];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
@@ -409,17 +420,15 @@ public class CameraActivity extends AppCompatActivity {
                         //stuff that updates ui
                         //updateText(Integer.toHexString(pixel));
                         //changes color of text
-                        String hex = "#"+Integer.toHexString(pixel);
-                        //System.out.println(pixel);
-                        txt = (TextView) findViewById(R.id.textView);
+
                         txt.setTextColor(Color.argb(0xFF, getColors.getRed(pixel), getColors.getGreen(pixel), getBlue(pixel)));
                         txt.setText(hex);
-                        if(percentMatch.percentMatch(h,pixel)) {
-                            txt.setTextColor(0);
-                        }
                     }
                 });
 
+                if(percentMatch.percentMatch(h, pixel)) {
+                    onWin();
+                }
                 image.close();
             }
         }
