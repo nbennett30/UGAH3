@@ -8,8 +8,8 @@ Hex Hunter is a game that produces a random *hexadecimal* RGB value, and the pla
 Simply point to an item that seems to have the same color as the random value, and hit the button. If you lose, nothing will happen.
 
 ## Sources and Libraries
-http://werner-dittmann.blogspot.com/2016/03/solving-some-mysteries-about-androids.html
-http://www.developmentshack.com/android-camera2-api-initialization
-https://opencv.org/
+- http://werner-dittmann.blogspot.com/2016/03/solving-some-mysteries-about-androids.html
+- http://www.developmentshack.com/android-camera2-api-initialization
+- https://opencv.org/
 
 
