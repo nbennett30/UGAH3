@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.bepis.ugah3.WinScreen">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/winscreen">
+
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+
+
+        <TextView  android:layout_centerInParent="true" android:layout_width="wrap_content" android:id="@+id/textView1"
+            android:layout_height="wrap_content" android:text=" " ></TextView>
+        <Button
+            android:id="@+id/fab"
+            android:layout_width="250dp"
+            android:layout_height="75dp"
+            android:layout_margin="@dimen/fab_margin"
+            android:text="MAIN MENU"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dip"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/textView1" />
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
