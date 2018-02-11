@@ -85,6 +85,7 @@ public class CameraActivity extends AppCompatActivity {
 
     public void onWin() {
         Intent intent = new Intent(this, WinScreen.class);
+        intent.putExtra("color", h);
         startActivity(intent);
     }
 
