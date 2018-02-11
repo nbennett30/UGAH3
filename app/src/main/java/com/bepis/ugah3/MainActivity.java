@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Button custom = (Button) findViewById(R.id.custom);
-        fab.setOnClickListener(new View.OnClickListener() {
+        custom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), CustomActivity.class);
