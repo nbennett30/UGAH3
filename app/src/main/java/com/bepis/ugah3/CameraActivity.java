@@ -132,10 +132,6 @@ public class CameraActivity extends AppCompatActivity {
         txt2.setTextColor(Color.argb(0xFF, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
         txt2.setText("#"+Integer.toHexString(h));
 
-        Button button = (Button) findViewById(R.id.button);
-        button.setText("Capture");
-        button.setBackgroundColor(17170457);
-        button.setTextColor(Color.WHITE);
     }
 
     @Override
@@ -385,7 +381,7 @@ public class CameraActivity extends AppCompatActivity {
     private class ImageReaderFrameWatcher implements ImageReader.OnImageAvailableListener {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            Image image = reader.acquireLatestImage();
+            final Image image = reader.acquireLatestImage();
             if (image != null) {
                 //Image.Plane plane = image.getPlanes()[0];
                 int width = image.getWidth();
@@ -432,6 +428,7 @@ public class CameraActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         for (int p : pixels) {
                             if (percentMatch.percentMatch(h, p)) {
+                                image.close();
                                 onWin();
                             }
                         }
