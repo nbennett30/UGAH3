@@ -131,6 +131,11 @@ public class CameraActivity extends AppCompatActivity {
         TextView txt2 = (TextView) findViewById(R.id.textView2);
         txt2.setTextColor(Color.argb(0xFF, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
         txt2.setText("#"+Integer.toHexString(h));
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setText("Capture");
+        button.setBackgroundColor(17170457);
+        button.setTextColor(Color.WHITE);
     }
 
     @Override
