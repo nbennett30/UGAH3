@@ -31,6 +31,14 @@ public class percentMatch {
 			zB = (double)xB/yB;
 		}
 		double zfinal = (zR+zG+zB)/3;
+		if (xR==0&&xG==0&&xB==0){
+			if(yR+yG+yB<=60){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
 
 		if (1-zfinal<=range){
 			return true;
