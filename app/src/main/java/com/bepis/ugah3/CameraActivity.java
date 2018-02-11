@@ -387,7 +387,7 @@ public class CameraActivity extends AppCompatActivity {
     private class ImageReaderFrameWatcher implements ImageReader.OnImageAvailableListener {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            final Image image = reader.acquireLatestImage();
+            Image image = reader.acquireLatestImage();
             if (image != null) {
                 Image.Plane plane = image.getPlanes()[0];
                 int width = image.getWidth();
@@ -403,6 +403,7 @@ public class CameraActivity extends AppCompatActivity {
                 double g = pix[1];
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
+                image.close();
                 final int pixel = rgb[width*height/2 + width/2];
                 final String hex = "#"+Integer.toHexString(pixel);
                 //System.out.println(pixel);
@@ -433,7 +434,6 @@ public class CameraActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         for (int p : pixels) {
                             if (percentMatch.percentMatch(h, p)) {
-                                image.close();
                                 onWin();
                             }
                         }
