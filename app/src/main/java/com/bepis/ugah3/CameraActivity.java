@@ -381,10 +381,10 @@ public class CameraActivity extends AppCompatActivity {
         public void onImageAvailable(ImageReader reader) {
             Image image = reader.acquireLatestImage();
             if (image != null) {
-                Image.Plane plane = image.getPlanes()[0];
+                //Image.Plane plane = image.getPlanes()[0];
                 int width = image.getWidth();
                 int height = image.getHeight();
-                ByteBuffer buffer = plane.getBuffer();
+                /*ByteBuffer buffer = plane.getBuffer();
                 //Log.i("ImageReaderFrameWatcher", "Size: " + buffer.limit());
                 byte[] bytes = new byte[buffer.capacity()];
                 buffer.get(bytes);
@@ -395,16 +395,17 @@ public class CameraActivity extends AppCompatActivity {
                 double g = pix[1];
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
+                image.close();
                 final int pixel = rgb[width*height/2 + width/2];
                 final String hex = "#"+Integer.toHexString(pixel);
                 //System.out.println(pixel);
                 txt = (TextView) findViewById(R.id.textView);
-                /*final int[] pixels = new int[9];
+                final int[] pixels = new int[9];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        pixels[i] = rgb[((width)*(i+(height/2)) + j)];
+                        pixels[i] = rgb[((width)*(i+(height/2)) + j + width/2)];
                     }
-                }*/
+                }
                 //final int pixel = getColors.averageHex(pixels);
                 //Log.d("Center Color: ", Integer.toHexString(pixel));
                 runOnUiThread(new Runnable() {
@@ -423,8 +424,10 @@ public class CameraActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(percentMatch.percentMatch(h, pixel)) {
-                            onWin();
+                        for (int p : pixels) {
+                            if (percentMatch.percentMatch(h, p)) {
+                                onWin();
+                            }
                         }
                     }
                 });
