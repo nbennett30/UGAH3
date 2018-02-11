@@ -1,8 +1,8 @@
 package com.bepis.ugah3;
 public class percentMatch {
 
-	public boolean percentMatch(int x, int y) {
-		final double range = .3;
+	public static boolean percentMatch(int x, int y) {
+		final double range = .25;
 		int xR = getColors.getRed(x);
 		int xG = getColors.getGreen(x);
 		int xB = getColors.getBlue(x);

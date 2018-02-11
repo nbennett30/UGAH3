@@ -65,6 +65,7 @@ public class CameraActivity extends AppCompatActivity {
     private HandlerThread handlerThread;
     private Handler handler;
     private TextView txt;
+    private static int h;
 
     // onSurfaceCreated
     private SurfaceHolder surfaceHolder;
@@ -122,10 +123,12 @@ public class CameraActivity extends AppCompatActivity {
         //changes color of reticle
         ImageView img = (ImageView) findViewById(R.id.imageView);
         GradientDrawable shp = (GradientDrawable) img.getBackground();
-        int h = randomHex.getRandomHex();
+        h = randomHex.getRandomHex();
         shp.setStroke(10, Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
 
-
+        txt = (TextView) findViewById(R.id.textView2);
+        txt.setTextColor(Color.argb(0xFF, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
+        txt.setText("#"+Integer.toHexString(h));
     }
 
     @Override
@@ -411,6 +414,9 @@ public class CameraActivity extends AppCompatActivity {
                         txt = (TextView) findViewById(R.id.textView);
                         txt.setTextColor(Color.argb(0xFF, getColors.getRed(pixel), getColors.getGreen(pixel), getBlue(pixel)));
                         txt.setText(hex);
+                        if(percentMatch.percentMatch(h,pixel)) {
+                            txt.setTextColor(0);
+                        }
                     }
                 });
 
