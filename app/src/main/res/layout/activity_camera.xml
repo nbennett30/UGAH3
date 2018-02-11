@@ -50,6 +50,7 @@
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
             android:background="@android:color/holo_orange_dark"
+            android:textColor="@android:color/white"
             android:text="Capture" />
     </RelativeLayout>
 
