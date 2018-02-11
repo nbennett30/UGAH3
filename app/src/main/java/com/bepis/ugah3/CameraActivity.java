@@ -125,11 +125,7 @@ public class CameraActivity extends AppCompatActivity {
         int h = randomHex.getRandomHex();
         shp.setStroke(10, Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
 
-        //changes color of reticle
-        String hex = "#"+Integer.toHexString(h);
-        txt = (TextView) findViewById(R.id.textView);
-        txt.setTextColor(Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
-        txt.setText(hex);
+
     }
 
     @Override
@@ -377,7 +373,6 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private class ImageReaderFrameWatcher implements ImageReader.OnImageAvailableListener {
-
         @Override
         public void onImageAvailable(ImageReader reader) {
             Image image = reader.acquireLatestImage();
@@ -401,12 +396,18 @@ public class CameraActivity extends AppCompatActivity {
                     public void run() {
                         //stuff that updates ui
                         updateText(Integer.toHexString(pixel));
+                        //changes color of text
+                        String hex = "#"+Integer.toHexString(pixel);
+                        txt = (TextView) findViewById(R.id.textView);
+                        txt.setTextColor(Color.argb(0xff, getColors.getRed(pixel), getColors.getGreen(pixel), getBlue(pixel)));
+                        txt.setText(hex);
                     }
                 });
 
                 image.close();
             }
         }
+
 
     }
 
