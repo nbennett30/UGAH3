@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import static com.bepis.ugah3.getColors.getBlue;
 
@@ -20,6 +21,10 @@ public class WinScreen extends AppCompatActivity {
         //getActionBar().setTitle("Congratulations!");
 
         int color = (int) getIntent().getExtras().get("color");
+
+        TextView txt = (TextView) findViewById(R.id.textView3);
+        txt.setTextColor(Color.argb(0xFF, getColors.getRed(color), getColors.getGreen(color), getBlue(color)));
+        txt.setText("#"+Integer.toHexString(color));
 
         ImageView img = (ImageView) findViewById(R.id.imageView2);
         GradientDrawable shp = (GradientDrawable) img.getBackground();

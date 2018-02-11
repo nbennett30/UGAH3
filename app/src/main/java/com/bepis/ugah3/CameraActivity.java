@@ -62,6 +62,7 @@ public class CameraActivity extends AppCompatActivity {
     private TextView txt;
     private static int h;
 
+
     // onSurfaceCreated
     private SurfaceHolder surfaceHolder;
     private Surface previewSurface;
@@ -123,14 +124,20 @@ public class CameraActivity extends AppCompatActivity {
         }
 
         //changes color of reticle
+        boolean bool = (boolean) getIntent().getExtras().get("bool");
         ImageView img = (ImageView) findViewById(R.id.imageView);
         GradientDrawable shp = (GradientDrawable) img.getBackground();
-        h = randomHex.getRandomHex();
+        if(bool) {
+            h = randomHex.getRandomHex();
+        }else{
+            h = getIntent().getExtras().getInt("input");
+        }
         shp.setStroke(10, Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
 
         TextView txt2 = (TextView) findViewById(R.id.textView2);
         txt2.setTextColor(Color.argb(0xFF, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
         txt2.setText("#"+Integer.toHexString(h));
+
     }
 
     @Override
@@ -380,7 +387,7 @@ public class CameraActivity extends AppCompatActivity {
     private class ImageReaderFrameWatcher implements ImageReader.OnImageAvailableListener {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            Image image = reader.acquireLatestImage();
+            final Image image = reader.acquireLatestImage();
             if (image != null) {
                 //Image.Plane plane = image.getPlanes()[0];
                 int width = image.getWidth();
@@ -427,6 +434,7 @@ public class CameraActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         for (int p : pixels) {
                             if (percentMatch.percentMatch(h, p)) {
+                                image.close();
                                 onWin();
                             }
                         }

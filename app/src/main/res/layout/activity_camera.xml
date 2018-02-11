@@ -49,7 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:text="Button" />
+            android:background="@android:color/holo_orange_light"
+            android:textColor="@android:color/white"
+            android:text="Capture" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
