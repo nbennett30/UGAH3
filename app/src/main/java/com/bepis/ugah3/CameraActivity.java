@@ -38,6 +38,7 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -426,9 +427,16 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 });
 
-                if(percentMatch.percentMatch(h, pixel)) {
-                    onWin();
-                }
+                Button button = (Button) findViewById(R.id.button);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(percentMatch.percentMatch(h, pixel)) {
+                            onWin();
+                        }
+                    }
+                });
+
                 image.close();
             }
         }
