@@ -23,4 +23,8 @@ public class getColors {
 		x >>>= 24;
 		return x;
 	}
+
+	public static int averageHex(int[] pixels) {
+		return 0;
+	}
 }
