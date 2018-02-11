@@ -64,6 +64,7 @@ public class CameraActivity extends AppCompatActivity {
     private ImageReader imageReader;
     private HandlerThread handlerThread;
     private Handler handler;
+    private TextView txt;
 
     // onSurfaceCreated
     private SurfaceHolder surfaceHolder;
@@ -121,7 +122,7 @@ public class CameraActivity extends AppCompatActivity {
 
         //changes color of reticle
         String hex = "#"+Integer.toHexString(h);
-        TextView txt = (TextView) findViewById(R.id.textView);
+        txt = (TextView) findViewById(R.id.textView);
         txt.setTextColor(Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
         txt.setText(hex);
     }
@@ -388,6 +389,9 @@ public class CameraActivity extends AppCompatActivity {
                 double g = pix[1];
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
+                int pixel = rgb[image.getWidth()*image.getHeight()/2 + image.getWidth()/2];
+                //Log.d("Center Color: ", Integer.toHexString(pixel));
+                txt.setText(Integer.toHexString(pixel));
                 image.close();
             }
         }
