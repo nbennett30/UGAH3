@@ -394,9 +394,16 @@ public class CameraActivity extends AppCompatActivity {
                 double g = pix[1];
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
-                int pixel = rgb[image.getWidth()*image.getHeight()/2 + image.getWidth()/2];
+                final int pixel = rgb[image.getWidth()*image.getHeight()/2 + image.getWidth()/2];
                 //Log.d("Center Color: ", Integer.toHexString(pixel));
-                updateText(Integer.toHexString(pixel));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //stuff that updates ui
+                        updateText(Integer.toHexString(pixel));
+                    }
+                });
+
                 image.close();
             }
         }
