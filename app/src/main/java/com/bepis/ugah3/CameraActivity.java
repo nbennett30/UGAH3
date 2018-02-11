@@ -394,14 +394,14 @@ public class CameraActivity extends AppCompatActivity {
                 double g = pix[1];
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
-                //final int pixel = rgb[width*height/2 + width/2];
-                final int[] pixels = new int[9];
+                final int pixel = rgb[width*height/2 + width/2];
+                /*final int[] pixels = new int[9];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
                         pixels[i] = rgb[((width)*(i+(height/2)) + j)];
                     }
-                }
-                final int pixel = getColors.averageHex(pixels);
+                }*/
+                //final int pixel = getColors.averageHex(pixels);
                 //Log.d("Center Color: ", Integer.toHexString(pixel));
                 runOnUiThread(new Runnable() {
                     @Override
