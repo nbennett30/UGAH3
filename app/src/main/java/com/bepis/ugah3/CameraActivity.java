@@ -403,16 +403,31 @@ public class CameraActivity extends AppCompatActivity {
                 double g = pix[1];
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
+                boolean valid = true;
+                if (rgb.length == 1) {
+                    valid = false;
+                }
                 image.close();
-                final int pixel = rgb[width*height/2 + width/2];
-                final String hex = "#"+Integer.toHexString(pixel);
-                //System.out.println(pixel);
-                txt = (TextView) findViewById(R.id.textView);
+                final String hex;
+                final int pixel;
                 final int[] pixels = new int[9];
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        pixels[i] = rgb[((width)*(i+(height/2)) + j + width/2)];
+                if (valid) {
+                    pixel = rgb[width * height / 2 + width / 2];
+                    hex = "#" + Integer.toHexString(pixel);
+                    //System.out.println(pixel);
+                    txt = (TextView) findViewById(R.id.textView);
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            pixels[i] = rgb[((width) * (i + (height / 2)) + j + width / 2)];
+                        }
                     }
+                } else {
+                    hex = "#000000";
+                    pixel = 0;
+                    for(int i = 0; i < pixels.length; i++) {
+                        pixels[i] = 0;
+                    }
+
                 }
                 //final int pixel = getColors.averageHex(pixels);
                 //Log.d("Center Color: ", Integer.toHexString(pixel));
@@ -481,32 +496,33 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private int[] getRGBIntFromPlanes(Image.Plane[] planes) {
-        ByteBuffer yPlane = planes[0].getBuffer();
-        ByteBuffer uPlane = planes[1].getBuffer();
-        ByteBuffer vPlane = planes[2].getBuffer();
+        try {
+            ByteBuffer yPlane = planes[0].getBuffer();
+            ByteBuffer uPlane = planes[1].getBuffer();
+            ByteBuffer vPlane = planes[2].getBuffer();
 
-        int bufferIndex = 0;
-        final int total = yPlane.capacity();
-        final int uvCapacity = uPlane.capacity();
-        final int width = planes[0].getRowStride();
-        int mHeight = surfaceView.getHeight();
-        int[] mRgbBuffer = new int[surfaceView.getWidth() * surfaceView.getHeight() * 3];
-        int yPos = 0;
-        for (int i = 0; i < mHeight; i++) {
-            int uvPos = (i >> 1) * width;
+            int bufferIndex = 0;
+            final int total = yPlane.capacity();
+            final int uvCapacity = uPlane.capacity();
+            final int width = planes[0].getRowStride();
+            int mHeight = surfaceView.getHeight();
+            int[] mRgbBuffer = new int[surfaceView.getWidth() * surfaceView.getHeight() * 3];
+            int yPos = 0;
+            for (int i = 0; i < mHeight; i++) {
+                int uvPos = (i >> 1) * width;
 
-            for (int j = 0; j < width; j++) {
-                if (uvPos >= uvCapacity-1)
-                    break;
-                if (yPos >= total)
-                    break;
+                for (int j = 0; j < width; j++) {
+                    if (uvPos >= uvCapacity - 1)
+                        break;
+                    if (yPos >= total)
+                        break;
 
-                int y1 = 0;
-                try {
-                    y1 = yPlane.get(yPos++) & 0xff;
-                } catch (Exception e) {
+                    int y1 = 0;
+                    try {
+                        y1 = yPlane.get(yPos++) & 0xff;
+                    } catch (Exception e) {
 
-                }
+                    }
 
             /*
               The ordering of the u (Cb) and v (Cr) bytes inside the planes is a
@@ -516,31 +532,35 @@ public class CameraActivity extends AppCompatActivity {
               here (IMHO): just copy the interleaved NV21 U/V data to two planes
               but keep the offset of the interleaving.
              */
-                final int u = (uPlane.get(uvPos) & 0xff) - 128;
-                final int v = (vPlane.get(uvPos) & 0xff) - 128;
-                if ((j & 1) == 1) {
-                    uvPos += 2;
+                    final int u = (uPlane.get(uvPos) & 0xff) - 128;
+                    final int v = (vPlane.get(uvPos) & 0xff) - 128;
+                    if ((j & 1) == 1) {
+                        uvPos += 2;
+                    }
+
+                    // This is the integer variant to convert YCbCr to RGB, NTSC values.
+                    // formulae found at
+                    // https://software.intel.com/en-us/android/articles/trusted-tools-in-the-new-android-world-optimization-techniques-from-intel-sse-intrinsics-to
+                    // and on StackOverflow etc.
+                    final int y1192 = 1192 * y1;
+                    int r = (y1192 + 1634 * v);
+                    int g = (y1192 - 833 * v - 400 * u);
+                    int b = (y1192 + 2066 * u);
+
+                    r = (r < 0) ? 0 : ((r > 262143) ? 262143 : r);
+                    g = (g < 0) ? 0 : ((g > 262143) ? 262143 : g);
+                    b = (b < 0) ? 0 : ((b > 262143) ? 262143 : b);
+
+                    mRgbBuffer[bufferIndex++] = ((r << 6) & 0xff0000) |
+                            ((g >> 2) & 0xff00) |
+                            ((b >> 10) & 0xff);
                 }
-
-                // This is the integer variant to convert YCbCr to RGB, NTSC values.
-                // formulae found at
-                // https://software.intel.com/en-us/android/articles/trusted-tools-in-the-new-android-world-optimization-techniques-from-intel-sse-intrinsics-to
-                // and on StackOverflow etc.
-                final int y1192 = 1192 * y1;
-                int r = (y1192 + 1634 * v);
-                int g = (y1192 - 833 * v - 400 * u);
-                int b = (y1192 + 2066 * u);
-
-                r = (r < 0) ? 0 : ((r > 262143) ? 262143 : r);
-                g = (g < 0) ? 0 : ((g > 262143) ? 262143 : g);
-                b = (b < 0) ? 0 : ((b > 262143) ? 262143 : b);
-
-                mRgbBuffer[bufferIndex++] = ((r << 6) & 0xff0000) |
-                        ((g >> 2) & 0xff00) |
-                        ((b >> 10) & 0xff);
             }
+            return mRgbBuffer;
+        } catch (Exception e) {
+            int[] r = {-1};
+            return r;
         }
-        return mRgbBuffer;
     }
 
 }
