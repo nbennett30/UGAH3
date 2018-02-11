@@ -392,10 +392,10 @@ public class CameraActivity extends AppCompatActivity {
                 double b = pix[0];*/
                 int[] rgb = getRGBIntFromPlanes(image.getPlanes());
                 //final int pixel = rgb[width*height/2 + width/2];
-                final int[] pixels = new int[(width/16) * (height/16)];
-                for (int i = 0; i < width/16; i++) {
-                    for (int j = 0; j < height/16; j++) {
-                        pixels[i] = rgb[(i*width + ((7*height/16)*width)) + j + (7*width/16)];
+                final int[] pixels = new int[9];
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        pixels[i] = rgb[((width)*(i+(height/2)) + j)];
                     }
                 }
                 final int pixel = getColors.averageHex(pixels);
@@ -404,10 +404,10 @@ public class CameraActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //stuff that updates ui
-                        updateText(Integer.toHexString(pixel));
+                        //updateText(Integer.toHexString(pixel));
                         //changes color of text
                         String hex = "#"+Integer.toHexString(pixel);
-                        System.out.println(pixel);
+                        //System.out.println(pixel);
                         txt = (TextView) findViewById(R.id.textView);
                         txt.setTextColor(Color.argb(0xFF, getColors.getRed(pixel), getColors.getGreen(pixel), getBlue(pixel)));
                         txt.setText(hex);
