@@ -100,7 +100,7 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("CameraActivity", "onCreate");
-
+        getActionBar().setTitle("Hex Hunter");
         setContentView(R.layout.activity_camera);
 
         this.surfaceView = (SurfaceView) this.findViewById(R.id.surfaceView);
