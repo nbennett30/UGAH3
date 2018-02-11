@@ -95,7 +95,7 @@ public class CameraActivity extends AppCompatActivity {
         Log.i("CameraActivity", "onCreate");
 
         setContentView(R.layout.activity_camera);
-        getActionBar().setTitle("Hex Hunter");
+        //getActionBar().setTitle("Hex Hunter");
         this.surfaceView = (SurfaceView) this.findViewById(R.id.surfaceView);
         this.cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
 
