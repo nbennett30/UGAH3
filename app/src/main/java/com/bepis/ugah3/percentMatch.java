@@ -2,7 +2,7 @@ package com.bepis.ugah3;
 public class percentMatch {
 
 	public static boolean percentMatch(int x, int y) {
-		final double range = .35;
+		final double range = .30;
 		int xR = getColors.getRed(x);
 		int xG = getColors.getGreen(x);
 		int xB = getColors.getBlue(x);

@@ -62,6 +62,7 @@ public class CameraActivity extends AppCompatActivity {
     private TextView txt;
     private static int h;
 
+
     // onSurfaceCreated
     private SurfaceHolder surfaceHolder;
     private Surface previewSurface;
@@ -123,9 +124,14 @@ public class CameraActivity extends AppCompatActivity {
         }
 
         //changes color of reticle
+        boolean bool = (boolean) getIntent().getExtras().get("bool");
         ImageView img = (ImageView) findViewById(R.id.imageView);
         GradientDrawable shp = (GradientDrawable) img.getBackground();
-        h = randomHex.getRandomHex();
+        if(bool) {
+            h = randomHex.getRandomHex();
+        }else{
+            h = getIntent().getExtras().getInt("input");
+        }
         shp.setStroke(10, Color.argb(0xff, getColors.getRed(h), getColors.getGreen(h), getBlue(h)));
 
         TextView txt2 = (TextView) findViewById(R.id.textView2);
