@@ -9,6 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
@@ -20,14 +21,36 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/hhtitle">
+
+</RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+
+
+    <TextView  android:layout_centerInParent="true" android:layout_width="wrap_content" android:id="@+id/textView1"
+        android:layout_height="wrap_content" android:text=" " ></TextView>
+    <Button
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:text="START"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dip"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView1" />
 
+</RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
