@@ -16,18 +16,21 @@ public class CustomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_custom);
 
         Button custom = (Button) findViewById(R.id.button2);
-        EditText text = (EditText) findViewById(R.id.editText);
-        String color = text.getText().toString();
-        try {
-            Integer.parseInt(color, 16);
-        } catch (NumberFormatException e) {
-            Toast.makeText(getApplicationContext(), "Invalid Hex Code", Toast.LENGTH_SHORT).show();
-        }
+        final EditText text = (EditText) findViewById(R.id.editText);
+
         custom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CameraActivity.class);
-                startActivity(intent);
+                String color = text.getText().toString();
+                try {
+                    Integer.parseInt(color, 16);
+                    Intent intent = new Intent(view.getContext(), CameraActivity.class);
+                    intent.putExtra("bool", false);
+                    startActivity(intent);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "Invalid Hex Code", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
