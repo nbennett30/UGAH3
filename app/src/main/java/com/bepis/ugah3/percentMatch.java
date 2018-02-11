@@ -7,9 +7,21 @@ public class percentMatch {
 		int xG = getColors.getGreen(x);
 		int xB = getColors.getBlue(x);
 
+		if(xR==0)
+			xR+=20;
+		if(xG==0)
+			xG+=20;
+		if(xB==0)
+			xB+=20;
 		int yR = getColors.getRed(y);
 		int yG = getColors.getGreen(y);
 		int yB = getColors.getBlue(y);
+		if(yR==0)
+			yR+=20;
+		if(xG==0)
+			yG+=20;
+		if(xB==0)
+			yB+=20;
 
 		double zR, zG, zB;
 		if(xR>=yR){
