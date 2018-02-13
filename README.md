@@ -2,7 +2,7 @@
 <img src="Screenshot_20180211-040638.png" alt="Drawing" style="width: 50px;"/>
 
 
-Hex Hunter is a game that produces a random *hexadecimal* RGB value, and the player tries to find a color in the real world that matches the random value with his/her camera! 
+Hex Hunter is an Android app that produces a random *hexadecimal* RGB value, and the player tries to find a color in the real world that matches the random value with his/her camera! Developed for UGA Hacks 3 over a 15 hour period.
 
 ## Instructions
 Simply point to an item that seems to have the same color as the random value, and hit the button. If you lose, nothing will happen.
